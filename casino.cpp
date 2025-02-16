@@ -1,6 +1,6 @@
-#include <iostream>
-#include <cstdlib> // 
-#include <ctime>   // 
+#include <iostream> // Fungsi untuk melakukan Input/Output
+#include <cstdlib> // Untuk fungsi rand() dan srand()
+#include <ctime>   // Untuk fungsi time()
 
 
 void tampilkanMenu() {
@@ -35,18 +35,18 @@ int generateAngka() {
 
 void tampilkanAngkaAcak(int &angka1, int &angka2, int &angka3) {
     std::cout << "Tekan Enter untuk menghasilkan angka pertama...\n";
-    std::cin.ignore(); 
-    std::cin.get();    
+    std::cin.ignore();
+    std::cin.get();
     angka1 = generateAngka();
     std::cout << angka1 << " ";
 
     std::cout << "\nTekan Enter untuk menghasilkan angka kedua...\n";
-    std::cin.get(); 
+    std::cin.get();
     angka2 = generateAngka();
     std::cout << angka1 << " " << angka2 << " ";
 
     std::cout << "\nTekan Enter untuk menghasilkan angka ketiga...\n";
-    std::cin.get(); 
+    std::cin.get();
     angka3 = generateAngka();
     std::cout << angka1 << " " << angka2 << " " << angka3 << "\n";
 }
@@ -67,49 +67,53 @@ int hitungSaldo(int saldo, int angka1, int angka2, int angka3) {
 }
 
 int main() {
-    
+
     std::string username, password;
     int pilihan;
     bool gameRunning = true;
 
-    
+
     std::srand(std::time(0));
 
     while (gameRunning) {
-        
+
         tampilkanMenu();
         std::cin >> pilihan;
 
-       
+
         if (pilihan == 1) {
-            
+
             inputUser(username, password);
 
-            
+
             int saldo = inputSaldo();
 
             bool gameOn = true;
 
-            
+
             while (gameOn) {
                 std::cout << "\nGame Dimulai! Tekan Enter untuk menghasilkan angka.\n";
 
-               
+
                 int angka1, angka2, angka3;
 
-               
+
                 tampilkanAngkaAcak(angka1, angka2, angka3);
 
-             
+
                 saldo = hitungSaldo(saldo, angka1, angka2, angka3);
 
-                
                 std::cout << "Saldo Akhir Anda: " << saldo << "\n";
 
                 // Menanyakan apakah pemain ingin bermain lagi
                 std::cout << "\nApakah Anda ingin bermain lagi? (1 untuk Ya, 2 untuk Keluar): ";
                 int pilihanLanjut;
                 std::cin >> pilihanLanjut;
+
+                if (saldo == 0) {
+                    std::cout << "Saldo Anda Habis... silahkan Isi ulang Saldo" << "\n";
+                    break;
+                }
 
                 if (pilihanLanjut == 2) {
                     gameOn = false;  // Keluar dari loop permainan
